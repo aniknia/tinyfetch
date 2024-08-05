@@ -1,11 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-#if defined(_WIN32)
-        #define PLATFORM "windows"
-#elif defined(_WIN64)
+#if defined(_WIN32) || defined(_WIN64)
         #define PLATFORM "windows"
 #elif defined(__linux__)
         #define PLATFORM "linux"
+	#include <unistd.h>
 #elif defined(__APPLE__)
         #define PLATFORM "apple"
 #else
@@ -13,7 +14,16 @@
 #endif
 
 int main(){
+	char *username = "";
+
+	if (PLATFORM == "windows"){
+		username = getenv("%username%");
+	} else {
+		username = getenv("USER");
+	}
+
 	printf("tinyfetch\n");
+	printf("user: %s \n", username);
 	printf("platform: %s \n", PLATFORM);
 	return 0;
 }
