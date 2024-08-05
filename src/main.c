@@ -3,22 +3,26 @@
 #include <string.h>
 
 #if defined(_WIN32) || defined(_WIN64)
-        #define PLATFORM "windows"
+#define PLATFORM "windows"
 #elif defined(__linux__)
-        #define PLATFORM "linux"
-	#include <unistd.h>
+#define PLATFORM "linux"
+#include <unistd.h>
 #elif defined(__APPLE__)
-        #define PLATFORM "apple"
+#define PLATFORM "apple"
 #else
-        #define PLATFORM "none"
+#define PLATFORM "none"
 #endif
 
-int main(){
+int main()
+{
 	char *username = "";
 
-	if (strcmp(PLATFORM, "windows") == 0){
-		username = getenv("%username%");
-	} else {
+	if (strcmp(PLATFORM, "windows") == 0)
+	{
+		username = getenv("username");
+	}
+	else
+	{
 		username = getenv("USER");
 	}
 
