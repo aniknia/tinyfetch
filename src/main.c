@@ -16,7 +16,7 @@
 int main(){
 	char *username = "";
 
-	if (PLATFORM == "windows"){
+	if (strcmp(PLATFORM, "windows") == 0){
 		username = getenv("%username%");
 	} else {
 		username = getenv("USER");
