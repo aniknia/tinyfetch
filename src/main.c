@@ -9,6 +9,7 @@
 	#include <unistd.h>
 #elif defined(__APPLE__)
 	#define PLATFORM "apple"
+	#include <unistd.h>
 #else
 	#define PLATFORM "none"
 #endif
