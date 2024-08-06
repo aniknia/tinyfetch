@@ -18,11 +18,13 @@
 
 int main()
 {
-	char *username = getname();
-	char *hostname = gethost();
+	char *username = "";
+	username = getname();
+	char *hostname = "";
+	hostname = gethost();
 
 	printf("tinyfetch\n");
-	printf("%s \n", username);
+	printf("%s@%s \n", username, hostname);
 	printf("platform: %s \n", PLATFORM);
 	return 0;
 }

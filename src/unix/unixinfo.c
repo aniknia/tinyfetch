@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdlib.h>
 #include "unixinfo.h"
 
 char* getname() {
@@ -6,7 +7,9 @@ char* getname() {
 }
 
 char* gethost() {
+	char* host = "";
 	char hostname[1024];
 	gethostname(hostname, sizeof(hostname));
-	return hostname;
+	host = hostname;
+	return host;
 }

@@ -3,14 +3,18 @@
 #include "windowsinfo.h"
 
 char* getname() {
-	return getenv("username");
+	char *username = "";
+	username = getenv("username");
+	return username;
 }
 
 char* gethost() {
+	char* host = "";
 	char hostname[1024];
 	WSADATA wsaData;
 	WSAStartup(MAKEWORD(2, 0), &wsaData);
 	gethostname(hostname, sizeof(hostname));
+	host = hostname;
 	WSACleanup();
-	return hostname;
+	return host;
 }
