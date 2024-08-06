@@ -16,6 +16,9 @@
 int main()
 {
 	char *username = "";
+	char hostname[1024];
+	
+	gethostname(hostname, sizeof(hostname));
 
 	if (strcmp(PLATFORM, "windows") == 0)
 	{
@@ -27,7 +30,7 @@ int main()
 	}
 
 	printf("tinyfetch\n");
-	printf("user: %s \n", username);
+	printf("%s@%s \n", username, hostname);
 	printf("platform: %s \n", PLATFORM);
 	return 0;
 }
