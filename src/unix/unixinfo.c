@@ -14,3 +14,48 @@ char* gethost() {
 	host = hostname;
 	return host;
 }
+
+char* getos() {
+}
+
+char* getkernal() {
+}
+
+char* getuptime() {
+}
+
+char* getpackages() {
+}
+
+char* getshell() {
+}
+
+char* getresolution() {
+}
+
+char* getwm() {
+}
+
+char* getwmtheme() {
+}
+
+char* gettheme() {
+}
+
+char* geticons() {
+}
+
+char* getterminal() {
+}
+
+char* getterminalfont() {
+}
+
+char* getcpu() {
+}
+
+char* getgpu() {
+}
+
+char* getmemory() {
+}
