@@ -2,21 +2,21 @@
 #define UNIXINFO_H
 
 char* getname();
-char* gethost();
-char* getos();
-char* getkernal();
-char* getuptime();
-char* getpackages();
-char* getshell();
-char* getresolution();
-char* getwm();
-char* getwmtheme();
-char* gettheme();
-char* geticons();
-char* getterminal();
-char* getterminalfont();
-char* getcpu();
-char* getgpu();
-char* getmemory();
+void gethost(char*);
+void getos(char*);
+void getkernal();
+void getuptime();
+void getpackages();
+void getshell();
+void getresolution();
+void getwm();
+void getwmtheme();
+void gettheme();
+void geticons();
+void getterminal();
+void getterminalfont();
+void getcpu();
+void getgpu();
+void getmemory();
 
 #endif

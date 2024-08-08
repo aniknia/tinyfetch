@@ -1,61 +1,67 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <sys/utsname.h>
 #include "unixinfo.h"
 
 char* getname() {
 	return getenv("USER");
 }
 
-char* gethost() {
-	char* host = "";
+void gethost(char* host) {
 	char hostname[1024];
 	gethostname(hostname, sizeof(hostname));
-	host = hostname;
-	return host;
+	strcpy(host, hostname);
 }
 
-char* getos() {
+void getos(char* distro) {
+	struct utsname uts;
+	if (uname(&uts) < 0) {
+		perror("uname() error");
+	} else {
+		strcpy(distro, uts.release);
+	}
 }
 
-char* getkernal() {
+void getkernal() {
 }
 
-char* getuptime() {
+void getuptime() {
 }
 
-char* getpackages() {
+void getpackages() {
 }
 
-char* getshell() {
+void getshell() {
 }
 
-char* getresolution() {
+void getresolution() {
 }
 
-char* getwm() {
+void getwm() {
 }
 
-char* getwmtheme() {
+void getwmtheme() {
 }
 
-char* gettheme() {
+void gettheme() {
 }
 
-char* geticons() {
+void geticons() {
 }
 
-char* getterminal() {
+void getterminal() {
 }
 
-char* getterminalfont() {
+void getterminalfont() {
 }
 
-char* getcpu() {
+void getcpu() {
 }
 
-char* getgpu() {
+void getgpu() {
 }
 
-char* getmemory() {
+void getmemory() {
 }

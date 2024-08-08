@@ -5,26 +5,26 @@
 #if defined(_WIN32) || defined(_WIN64)
 #define PLATFORM "windows"
 #include "windows/windowsinfo.h"
-#else
-#include "unix/unixinfo.h"
-#if defined(__linux__)
+#elif defined(__linux__)
 #define PLATFORM "linux"
+#include "unix/unixinfo.h"
 #elif defined(__APPLE__)
 #define PLATFORM "apple"
+#include "unix/unixinfo.h"
 #else
 #define PLATFORM "none"
-#endif
 #endif
 
 int main()
 {
-	char *username = "";
-	username = getname();
-	char *hostname = "";
-	hostname = gethost();
+	char *username = getname();
+	char hostname[1024];
+	gethost(hostname);
+	char distrobution[1024];
+	getos(distrobution);
 
 	printf("tinyfetch\n");
 	printf("%s@%s \n", username, hostname);
-	printf("platform: %s \n", PLATFORM);
+	printf("OS: %s \n", distrobution);
 	return 0;
 }
