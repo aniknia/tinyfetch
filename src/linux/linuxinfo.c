@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/utsname.h>
-#include "unixinfo.h"
+#include "linuxinfo.h"
 
 char* getname() {
 	return getenv("USER");

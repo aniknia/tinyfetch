@@ -7,10 +7,10 @@
 #include "windows/windowsinfo.h"
 #elif defined(__linux__)
 #define PLATFORM "linux"
-#include "unix/unixinfo.h"
+#include "linux/linuxinfo.h"
 #elif defined(__APPLE__)
 #define PLATFORM "apple"
-#include "unix/unixinfo.h"
+#include "apple/appleinfo.h"
 #else
 #define PLATFORM "none"
 #endif

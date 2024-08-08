@@ -1,5 +1,5 @@
-#ifndef UNIXINFO_H
-#define UNIXINFO_H
+#ifndef APPLEINFO_H
+#define APPLEINFO_H
 
 char* getname();
 void gethost(char*);
