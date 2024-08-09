@@ -20,11 +20,11 @@ int main()
 	char *username = getname();
 	char hostname[1024];
 	gethost(hostname);
-	char distrobution[1024];
-	getos(distrobution);
+	char distribution[1024];
+	getos(distribution);
 
 	printf("tinyfetch\n");
 	printf("%s@%s \n", username, hostname);
-	printf("OS: %s \n", distrobution);
+	printf("OS: %s \n", distribution);
 	return 0;
 }
