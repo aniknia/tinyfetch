@@ -2,6 +2,7 @@
 #define WINDOWSINFO_H
 
 char* getname();
-char* gethost();
+void gethost(char*);
+void getkernel(char*);
 
 #endif

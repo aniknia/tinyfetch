@@ -4,7 +4,7 @@
 char* getname();
 void gethost(char*);
 void getos(char*);
-void getkernal();
+void getkernel(char*);
 void getuptime();
 void getpackages();
 void getshell();
