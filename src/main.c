@@ -18,13 +18,19 @@
 int main()
 {
 	char *username = getname();
+	
 	char hostname[1024];
 	gethost(hostname);
+	
 	char distrobution[1024];
 	getos(distrobution);
+	
+	char kernel[1024];
+	getkernel(kernel);
 
 	printf("tinyfetch\n");
 	printf("%s@%s \n", username, hostname);
 	printf("OS: %s \n", distrobution);
+	printf("Kernel: %s \n", kernel);
 	return 0;
 }

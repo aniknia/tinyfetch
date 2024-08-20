@@ -8,13 +8,11 @@ char* getname() {
 	return username;
 }
 
-char* gethost() {
-	char* host = "";
+void gethost(char* host) {
 	char hostname[1024];
 	WSADATA wsaData;
 	WSAStartup(MAKEWORD(2, 0), &wsaData);
 	gethostname(hostname, sizeof(hostname));
-	host = hostname;
+	strcpy(host, hostname);
 	WSACleanup();
-	return host;
 }

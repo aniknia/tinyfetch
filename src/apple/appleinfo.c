@@ -20,11 +20,21 @@ void getos(char* distro) {
 	if (uname(&uts) < 0) {
 		perror("uname() error");
 	} else {
-		strcpy(distro, uts.release);
+		strcpy(distro, uts.sysname);
+		strcat(distro, " ");
+		strcat(distro, uts.release);
 	}
 }
 
-void getkernal() {
+void getkernel(char* kernel) {
+	struct utsname uts;
+	if (uname(&uts) < 0) {
+		perror("uname() error");
+	} else {
+		strcpy(kernel, uts.sysname);
+		strcat(kernel, " ");
+		strcat(kernel, uts.release);
+	}
 }
 
 void getuptime() {
