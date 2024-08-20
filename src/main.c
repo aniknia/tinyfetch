@@ -22,15 +22,16 @@ int main()
 	char hostname[1024];
 	gethost(hostname);
 	
-	char distrobution[1024];
-	getos(distrobution);
+	char distribution[1024];
+	getos(distribution);
 	
 	char kernel[1024];
 	getkernel(kernel);
 
 	printf("tinyfetch\n");
 	printf("%s@%s \n", username, hostname);
-	printf("OS: %s \n", distrobution);
+	printf("OS: %s \n", distribution);
 	printf("Kernel: %s \n", kernel);
+
 	return 0;
 }
