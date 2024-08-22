@@ -15,7 +15,7 @@ void gettheme();
 void geticons();
 void getterminal();
 void getterminalfont();
-void getcpu();
+void getcpu(char*);
 void getgpu();
 void getmemory();
 

@@ -13,6 +13,8 @@ void gethost(char* host) {
 	char hostname[1024];
 	gethostname(hostname, sizeof(hostname));
 	strcpy(host, hostname);
+
+	//Can also use uts.nodename
 }
 
 void getos(char* distro) {
@@ -23,6 +25,8 @@ void getos(char* distro) {
 		strcpy(distro, uts.sysname);
 		strcat(distro, " ");
 		strcat(distro, uts.release);
+		strcat(distro, " ");
+		//strcat(distro, uts.machine);
 	}
 }
 
@@ -67,7 +71,13 @@ void getterminal() {
 void getterminalfont() {
 }
 
-void getcpu() {
+void getcpu(char* cpu) {
+	struct utsname uts;
+	if (uname(&uts) < 0) {
+		perror("uname() error");
+	} else {
+		strcpy(cpu, uts.machine);
+	}
 }
 
 void getgpu() {

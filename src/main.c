@@ -28,10 +28,14 @@ int main()
 	char kernel[1024];
 	getkernel(kernel);
 
+	char cpu[1024];
+	getcpu(cpu);
+
 	printf("tinyfetch\n");
 	printf("%s@%s \n", username, hostname);
 	printf("OS: %s \n", distribution);
 	printf("Kernel: %s \n", kernel);
+	printf("CPU: %s \n", cpu);
 
 	return 0;
 }
