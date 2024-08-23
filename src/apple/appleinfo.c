@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/utsname.h>
+#include <sys/sysctl.h>
 #include "appleinfo.h"
 
 char* getname() {
@@ -72,15 +73,18 @@ void getterminalfont() {
 }
 
 void getcpu(char* cpu) {
-	struct utsname uts;
-	if (uname(&uts) < 0) {
-		perror("uname() error");
-	} else {
-		strcpy(cpu, uts.machine);
-	}
+    size_t len;
+    char cpu_brand[256];
+
+    len = sizeof(cpu_brand);
+    if (sysctlbyname("machdep.cpu.brand_string", &cpu_brand, &len, NULL, 0) == -1) {
+        perror("sysctlbyname() error");
+    }
+	
+	strcpy(cpu, cpu_brand);
 }
 
-void getgpu() {
+void getgpu(char* gpu) {
 }
 
 void getmemory() {
