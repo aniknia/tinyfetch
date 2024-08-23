@@ -15,6 +15,15 @@
 #define PLATFORM "none"
 #endif
 
+#define RED   "\x1B[31m"
+#define GRN   "\x1B[32m"
+#define YEL   "\x1B[33m"
+#define BLU   "\x1B[34m"
+#define MAG   "\x1B[35m"
+#define CYN   "\x1B[36m"
+#define WHT   "\x1B[37m"
+#define RESET "\x1B[0m"
+
 int main()
 {
 	char *username = getname();
@@ -31,11 +40,11 @@ int main()
 	char cpu[1024];
 	getcpu(cpu);
 
-	printf("tinyfetch\n");
-	printf("%s@%s \n", username, hostname);
-	printf("OS: %s \n", distribution);
-	printf("Kernel: %s \n", kernel);
-	printf("CPU: %s \n", cpu);
+	printf(YEL "tinyfetch\n" RESET);
+	printf(RED "User > " RESET "%s@%s \n", username, hostname);
+	printf(GRN "OS > " RESET "%s \n", distribution);
+	printf(BLU "Kernel > " RESET "%s \n", kernel);
+	printf(CYN "CPU > " RESET "%s \n", cpu);
 
 	return 0;
 }
