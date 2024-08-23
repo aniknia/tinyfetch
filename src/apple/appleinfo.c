@@ -79,9 +79,20 @@ void getcpu(char* cpu) {
     len = sizeof(cpu_brand);
     if (sysctlbyname("machdep.cpu.brand_string", &cpu_brand, &len, NULL, 0) == -1) {
         perror("sysctlbyname() error");
-    }
-	
+    } else {
 	strcpy(cpu, cpu_brand);
+	}
+
+	struct utsname uts;
+	
+	if(uname(&uts) < 0) {
+		perror("uname() error");
+	} else {
+		strcat(cpu , " (");
+		strcat(cpu, uts.machine);
+		strcat(cpu, ")");
+	}
+
 }
 
 void getgpu(char* gpu) {
