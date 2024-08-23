@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/utsname.h>
+#include <sys/sysctl.h>
 #include "appleinfo.h"
 
 char* getname() {
@@ -13,6 +14,8 @@ void gethost(char* host) {
 	char hostname[1024];
 	gethostname(hostname, sizeof(hostname));
 	strcpy(host, hostname);
+
+	//Can also use uts.nodename
 }
 
 void getos(char* distro) {
@@ -23,6 +26,8 @@ void getos(char* distro) {
 		strcpy(distro, uts.sysname);
 		strcat(distro, " ");
 		strcat(distro, uts.release);
+		strcat(distro, " ");
+		//strcat(distro, uts.machine);
 	}
 }
 
@@ -67,10 +72,30 @@ void getterminal() {
 void getterminalfont() {
 }
 
-void getcpu() {
+void getcpu(char* cpu) {
+    size_t len;
+    char cpu_brand[256];
+
+    len = sizeof(cpu_brand);
+    if (sysctlbyname("machdep.cpu.brand_string", &cpu_brand, &len, NULL, 0) == -1) {
+        perror("sysctlbyname() error");
+    } else {
+	strcpy(cpu, cpu_brand);
+	}
+
+	struct utsname uts;
+	
+	if(uname(&uts) < 0) {
+		perror("uname() error");
+	} else {
+		strcat(cpu , " (");
+		strcat(cpu, uts.machine);
+		strcat(cpu, ")");
+	}
+
 }
 
-void getgpu() {
+void getgpu(char* gpu) {
 }
 
 void getmemory() {
