@@ -1,4 +1,4 @@
-<h3 align="center"><img src="https://i.imgur.com/LMG4ghf.png" alt="logo" height="100px"></h3>
+<h3 align="center"><img src="img/logo.png" alt="logo" height="100px"></h3>
 
 <p align="center">A tiny command line system information tool written in C.</p>
   
