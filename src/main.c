@@ -28,23 +28,26 @@ int main()
 {
 	char *username = getname();
 	
-	char hostname[1024];
+	char hostname[1024] = "host";
 	gethost(hostname);
 	
-	char distribution[1024];
+	char distribution[1024] = "distro";
 	getos(distribution);
 	
-	char kernel[1024];
+	char kernel[1024] = "kernel";
 	getkernel(kernel);
 
-	char cpu[1024];
+	char cpu[1024] = "cpu";
 	getcpu(cpu);
 
-	printf(YEL "tinyfetch\n" RESET);
+	char gpu[1024] = "gpu";
+	getgpu(gpu);
+
 	printf(RED "User > " RESET "%s@%s \n", username, hostname);
 	printf(GRN "OS > " RESET "%s \n", distribution);
 	printf(BLU "Kernel > " RESET "%s \n", kernel);
 	printf(CYN "CPU > " RESET "%s \n", cpu);
+	printf(YEL "GPU > " RESET "%s \n", gpu);
 
 	return 0;
 }
