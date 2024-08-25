@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/utsname.h>
+#include <linux/sysctl.h>
 #include "linuxinfo.h"
 
 char* getname() {
@@ -16,12 +17,36 @@ void gethost(char* host) {
 }
 
 void getos(char* distro) {
-	struct utsname uts;
-	if (uname(&uts) < 0) {
-		perror("uname() error");
+	FILE* fp;
+	char distroName[128];
+
+	if((fp = fopen("/etc/os-release", "r")) == NULL) {
+		perror("Error opening /etc/*-release");
 	} else {
-		strcpy(distro, uts.release);
+		int c;
+		int i = 0;
+		char str[1024];
+		while ((c = getc(fp)) != EOF) {
+			if (c == '\n') {
+				memset(str, 0, sizeof(str));
+				i = 0;
+			} else {
+				
+				if (strcmp(str, "PRETTY_NAME=\"") == 0) {
+					int j = 0;
+					while (c != 34) {
+						distroName[j++] = c;
+						c = getc(fp);
+					}
+					break;
+				}
+				str[i++] = c;
+			}
+		}
 	}
+	fclose(fp);
+
+	strcpy(distro, distroName);
 }
 
 void getkernel(char* kernel) {
@@ -66,6 +91,36 @@ void getterminalfont() {
 }
 
 void getcpu(char* cpu) {
+	FILE* fp;
+	char cpuName[128];
+
+	if((fp = fopen("/proc/cpuinfo", "r")) == NULL) {
+		perror("Error opening /proc/cpuinfo");
+	} else {
+		int c;
+		int i = 0;
+		char str[1024];
+		while ((c = getc(fp)) != EOF) {
+			if (c == '\n') {
+				memset(str, 0, sizeof(str));
+				i = 0;
+			} else {
+				
+				if (strcmp(str, "model name\t: ") == 0) {
+					int j = 0;
+					while (c != 10) {
+						cpuName[j++] = c;
+						c = getc(fp);
+					}
+					break;
+				}
+				str[i++] = c;
+			}
+		}
+	}
+	fclose(fp);
+
+	strcpy(cpu, cpuName);
 }
 
 void getgpu(char* gpu) {
