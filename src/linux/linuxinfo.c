@@ -65,10 +65,10 @@ void getterminal() {
 void getterminalfont() {
 }
 
-void getcpu() {
+void getcpu(char* cpu) {
 }
 
-void getgpu() {
+void getgpu(char* gpu) {
 }
 
 void getmemory() {
