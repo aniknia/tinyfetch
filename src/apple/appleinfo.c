@@ -81,7 +81,10 @@ void getos(char* distro) {
     } else if (major == 14) {
 		strcpy(osName, "macOS");
         strcpy(versionName, "Sonoma");
-    } else {
+    } else if (major == 15) {
+		strcpy(osName, "macOS");
+		strcpy(versionName, "Sequoia");
+	}else {
 		strcpy(osName, "Unknown OS version");
         strcpy(versionName, "Unknown version name");
     }
