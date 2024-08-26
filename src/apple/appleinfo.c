@@ -33,7 +33,7 @@ void getos(char* distro) {
 		int c;
 		int i = 0;
 		char str [512];
-		while ((c = getc(fp)) !=EOF) {
+		while ((c = getc(fp)) != EOF) {
 			if (c == '\n') {
 				if(strcmp(str, "\t<key>ProductVersion</key>") == 0) {
 					fscanf(fp, "\t<string>%d.%d.%d</string>", &major, &minor, &rev);
@@ -162,6 +162,24 @@ void getcpu(char* cpu) {
 }
 
 void getgpu(char* gpu) {
+	FILE *fp;
+	char str [256];
+
+	if ((fp = popen("system_profiler SPDisplaysDataType | grep 'Chipset Model'", "r")) == NULL) {
+		perror("system_profile failed to run");
+	} else {
+		int c;
+		int i = 0;
+		while ((c = getc(fp)) != '\n') {
+			if (strcmp(str, "      Chipset Model: ") == 0) {
+				memset(str, 0, sizeof(str));
+				i = 0;
+			}
+			str[i++] = c;
+		}
+	}
+	strcpy(gpu, str);
+
 }
 
 void getmemory() {
