@@ -20,13 +20,9 @@ void gethost(char* host) {
 
 void getos(char* distro) {
 	FILE *fp;
-	int major, minor, rev;
-	char majorVersion[3];
-	char minorVersion[3];
-	char revVersion[3];
-
-	char osName[128];
-	char versionName[128];
+	int major, minor, rev, matched = 0;
+	char majorVersion[3], minorVersion[3], revVersion[3] = {0};
+	char osName[128], versionName[128] = {0};
 
 	if ((fp = fopen("/System/Library/CoreServices/SystemVersion.plist", "r")) == NULL){
 		perror("Error opening SystemVersion.plist");
@@ -37,74 +33,79 @@ void getos(char* distro) {
 		while ((c = getc(fp)) != EOF) {
 			if (c == '\n') {
 				if(strcmp(str, "\t<key>ProductVersion</key>") == 0) {
+					matched = 1;
 					fscanf(fp, "\t<string>%d.%d.%d</string>", &major, &minor, &rev);
 					break;
 				}
 				memset(str, 0, sizeof(str));
 				i = 0;
 			} else {
-				str[i] = c;
-				i++;
+				if (i > sizeof(str) - 1) {
+					break;
+				}
+				str[i++] = c;
 			}
 		}
 	}
 	fclose(fp);
 
-	if (major == 10) {
-		switch (minor) {
-			case 0: strcpy(osName, "Mac OS X"); strcpy(versionName, "Cheetah"); break;
-			case 1: strcpy(osName, "Mac OS X"); strcpy(versionName, "Puma"); break;
-            case 2: strcpy(osName, "Mac OS X"); strcpy(versionName, "Jaguar"); break;
-            case 3: strcpy(osName, "Mac OS X"); strcpy(versionName, "Panther"); break;
-            case 4: strcpy(osName, "Mac OS X"); strcpy(versionName, "Tiger"); break;
-            case 5: strcpy(osName, "Mac OS X"); strcpy(versionName, "Leopard"); break;
-            case 6: strcpy(osName, "Mac OS X"); strcpy(versionName, "Snow Leopard"); break;
-            case 7: strcpy(osName, "Mac OS X"); strcpy(versionName, "Lion"); break;
-            case 8: strcpy(osName, "OS X"); strcpy(versionName, "Mountain Lion"); break;
-            case 9: strcpy(osName, "OS X"); strcpy(versionName, "Mavericks"); break;
-            case 10: strcpy(osName, "OS X"); strcpy(versionName, "Yosemite"); break;
-            case 11: strcpy(osName, "OS X"); strcpy(versionName, "El Capitan"); break;
-            case 12: strcpy(osName, "macOS"); strcpy(versionName, "Sierra"); break;
-            case 13: strcpy(osName, "macOS"); strcpy(versionName, "High Sierra"); break;
-            case 14: strcpy(osName, "macOS"); strcpy(versionName, "Mojave"); break;
-            case 15: strcpy(osName, "macOS"); strcpy(versionName, "Catalina"); break;
-        }
-	} else if (major == 11) {
-		strcpy(osName, "macOS");
-        strcpy(versionName, "Big Sur");
-    } else if (major == 12) {
-		strcpy(osName, "macOS");
-        strcpy(versionName, "Monterey");
-    } else if (major == 13) {
-		strcpy(osName, "macOS");
-        strcpy(versionName, "Ventura");
-    } else if (major == 14) {
-		strcpy(osName, "macOS");
-        strcpy(versionName, "Sonoma");
-    } else if (major == 15) {
-		strcpy(osName, "macOS");
-		strcpy(versionName, "Sequoia");
-	}else {
-		strcpy(osName, "Unknown OS version");
-        strcpy(versionName, "Unknown version name");
-    }
+	if (matched == 1) {
+		if (major == 10) {
+			switch (minor) {
+				case 0: strcpy(osName, "Mac OS X"); strcpy(versionName, "Cheetah"); break;
+				case 1: strcpy(osName, "Mac OS X"); strcpy(versionName, "Puma"); break;
+	            case 2: strcpy(osName, "Mac OS X"); strcpy(versionName, "Jaguar"); break;
+				case 3: strcpy(osName, "Mac OS X"); strcpy(versionName, "Panther"); break;
+				case 4: strcpy(osName, "Mac OS X"); strcpy(versionName, "Tiger"); break;
+            	case 5: strcpy(osName, "Mac OS X"); strcpy(versionName, "Leopard"); break;
+           		case 6: strcpy(osName, "Mac OS X"); strcpy(versionName, "Snow Leopard"); break;
+            	case 7: strcpy(osName, "Mac OS X"); strcpy(versionName, "Lion"); break;
+            	case 8: strcpy(osName, "OS X"); strcpy(versionName, "Mountain Lion"); break;
+            	case 9: strcpy(osName, "OS X"); strcpy(versionName, "Mavericks"); break;
+            	case 10: strcpy(osName, "OS X"); strcpy(versionName, "Yosemite"); break;
+            	case 11: strcpy(osName, "OS X"); strcpy(versionName, "El Capitan"); break;
+            	case 12: strcpy(osName, "macOS"); strcpy(versionName, "Sierra"); break;
+            	case 13: strcpy(osName, "macOS"); strcpy(versionName, "High Sierra"); break;
+            	case 14: strcpy(osName, "macOS"); strcpy(versionName, "Mojave"); break;
+            	case 15: strcpy(osName, "macOS"); strcpy(versionName, "Catalina"); break;
+        	}
+		} else if (major == 11) {
+			strcpy(osName, "macOS");
+        	strcpy(versionName, "Big Sur");
+    	} else if (major == 12) {
+			strcpy(osName, "macOS");
+        	strcpy(versionName, "Monterey");
+    	} else if (major == 13) {
+			strcpy(osName, "macOS");
+        	strcpy(versionName, "Ventura");
+    	} else if (major == 14) {
+			strcpy(osName, "macOS");
+        	strcpy(versionName, "Sonoma");
+    	} else if (major == 15) {
+			strcpy(osName, "macOS");
+			strcpy(versionName, "Sequoia");
+		}else {
+			strcpy(osName, "Unknown OS version");
+        	strcpy(versionName, "Unknown version name");
+    	}
 
-	sprintf(majorVersion, "%d", major);
-	sprintf(minorVersion, "%d", minor);
-	sprintf(revVersion, "%d", rev);
+		sprintf(majorVersion, "%d", major);
+		sprintf(minorVersion, "%d", minor);
+		sprintf(revVersion, "%d", rev);
 
-	strcpy(distro, osName);
-	strcat(distro, " ");
-	strcat(distro, majorVersion);
-	strcat(distro, ".");
-	strcat(distro, minorVersion);
-	strcat(distro, ".");
-	strcat(distro, revVersion);
-	strcat(distro, " (");
-	strcat(distro, versionName);
-	strcat(distro, ")");
-	
-	
+		strcpy(distro, osName);
+		strcat(distro, " ");
+		strcat(distro, majorVersion);
+		strcat(distro, ".");
+		strcat(distro, minorVersion);
+		strcat(distro, ".");
+		strcat(distro, revVersion);
+		strcat(distro, " (");
+		strcat(distro, versionName);
+		strcat(distro, ")");
+	} else {
+		strcpy(distro, "Uknown distribution");
+	}
 }
 
 void getkernel(char* kernel) {
@@ -150,13 +151,13 @@ void getterminalfont() {
 
 void getcpu(char* cpu) {
     size_t len;
-    char cpu_brand[256];
+    char cpu_brand[256] = {0};
 
     len = sizeof(cpu_brand);
     if (sysctlbyname("machdep.cpu.brand_string", &cpu_brand, &len, NULL, 0) == -1) {
         perror("sysctlbyname() error");
     } else {
-	strcpy(cpu, cpu_brand);
+		strcpy(cpu, cpu_brand);
 	}
 
 	struct utsname uts;
@@ -173,23 +174,33 @@ void getcpu(char* cpu) {
 
 void getgpu(char* gpu) {
 	FILE *fp;
-	char str [256];
+	char str[128] = {0};
+	char line[256];
+	int matched = 0;
 
 	if ((fp = popen("system_profiler SPDisplaysDataType | grep 'Chipset Model'", "r")) == NULL) {
 		perror("system_profile failed to run");
 	} else {
-		int c;
-		int i = 0;
-		while ((c = getc(fp)) != '\n') {
+		int c, i = 0;
+		while ((c = getc(fp)) != 10) {
 			if (strcmp(str, "      Chipset Model: ") == 0) {
+				matched = 1;
 				memset(str, 0, sizeof(str));
 				i = 0;
+			}
+			if (i > sizeof(str) - 1) {
+				break;
 			}
 			str[i++] = c;
 		}
 	}
-	strcpy(gpu, str);
-
+	pclose(fp);
+	
+	if (matched == 1) {
+		strcpy(gpu, str);
+	} else {
+		strcmp(gpu, "Unkown GPU");
+	}
 }
 
 void getmemory() {
