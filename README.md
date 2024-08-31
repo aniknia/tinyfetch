@@ -7,3 +7,11 @@
 </p>
 
 Tinyfetch is a tiny command line system information tool written in C. It can show you information about the current user, hostname, operating system, and software in a small but quick package.
+
+### Previews
+
+#### Mac Sonoma (M1)
+<img src="img/mac_sonoma_m1.png" height="80px">
+
+#### Mac Ventura (Intel)
+<img src="img/mac_ventura_intel.jpg" height="80px">
