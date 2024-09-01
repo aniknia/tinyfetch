@@ -50,44 +50,35 @@ void getos(char* distro) {
 	fclose(fp);
 
 	if (matched == 1) {
-		if (major == 10) {
-			switch (minor) {
-				case 0: strcpy(osName, "Mac OS X"); strcpy(versionName, "Cheetah"); break;
-				case 1: strcpy(osName, "Mac OS X"); strcpy(versionName, "Puma"); break;
-	            case 2: strcpy(osName, "Mac OS X"); strcpy(versionName, "Jaguar"); break;
-				case 3: strcpy(osName, "Mac OS X"); strcpy(versionName, "Panther"); break;
-				case 4: strcpy(osName, "Mac OS X"); strcpy(versionName, "Tiger"); break;
-            	case 5: strcpy(osName, "Mac OS X"); strcpy(versionName, "Leopard"); break;
-           		case 6: strcpy(osName, "Mac OS X"); strcpy(versionName, "Snow Leopard"); break;
-            	case 7: strcpy(osName, "Mac OS X"); strcpy(versionName, "Lion"); break;
-            	case 8: strcpy(osName, "OS X"); strcpy(versionName, "Mountain Lion"); break;
-            	case 9: strcpy(osName, "OS X"); strcpy(versionName, "Mavericks"); break;
-            	case 10: strcpy(osName, "OS X"); strcpy(versionName, "Yosemite"); break;
-            	case 11: strcpy(osName, "OS X"); strcpy(versionName, "El Capitan"); break;
-            	case 12: strcpy(osName, "macOS"); strcpy(versionName, "Sierra"); break;
-            	case 13: strcpy(osName, "macOS"); strcpy(versionName, "High Sierra"); break;
-            	case 14: strcpy(osName, "macOS"); strcpy(versionName, "Mojave"); break;
-            	case 15: strcpy(osName, "macOS"); strcpy(versionName, "Catalina"); break;
-        	}
-		} else if (major == 11) {
-			strcpy(osName, "macOS");
-        	strcpy(versionName, "Big Sur");
-    	} else if (major == 12) {
-			strcpy(osName, "macOS");
-        	strcpy(versionName, "Monterey");
-    	} else if (major == 13) {
-			strcpy(osName, "macOS");
-        	strcpy(versionName, "Ventura");
-    	} else if (major == 14) {
-			strcpy(osName, "macOS");
-        	strcpy(versionName, "Sonoma");
-    	} else if (major == 15) {
-			strcpy(osName, "macOS");
-			strcpy(versionName, "Sequoia");
-		}else {
-			strcpy(osName, "Unknown OS version");
-        	strcpy(versionName, "Unknown version name");
-    	}
+		strcpy(osName, "macOS");
+		switch (major) {
+			case 10: {		 
+				switch (minor) {
+					case 0: strcpy(osName, "Mac OS X"); strcpy(versionName, "Cheetah"); break;
+					case 1: strcpy(osName, "Mac OS X"); strcpy(versionName, "Puma"); break;
+	            	case 2: strcpy(osName, "Mac OS X"); strcpy(versionName, "Jaguar"); break;
+					case 3: strcpy(osName, "Mac OS X"); strcpy(versionName, "Panther"); break;
+					case 4: strcpy(osName, "Mac OS X"); strcpy(versionName, "Tiger"); break;
+            		case 5: strcpy(osName, "Mac OS X"); strcpy(versionName, "Leopard"); break;
+           			case 6: strcpy(osName, "Mac OS X"); strcpy(versionName, "Snow Leopard"); break;
+            		case 7: strcpy(osName, "Mac OS X"); strcpy(versionName, "Lion"); break;
+            		case 8: strcpy(osName, "OS X"); strcpy(versionName, "Mountain Lion"); break;
+            		case 9: strcpy(osName, "OS X"); strcpy(versionName, "Mavericks"); break;
+            		case 10: strcpy(osName, "OS X"); strcpy(versionName, "Yosemite"); break;
+            		case 11: strcpy(osName, "OS X"); strcpy(versionName, "El Capitan"); break;
+            		case 12: strcpy(versionName, "Sierra"); break;
+            		case 13: strcpy(versionName, "High Sierra"); break;
+            		case 14: strcpy(versionName, "Mojave"); break;
+            		case 15: strcpy(versionName, "Catalina"); break;
+        		}
+			}
+			case 11: strcpy(versionName, "Big Sur"); break;
+			case 12: strcpy(versionName, "Monterey"); break;
+			case 13: strcpy(versionName, "Ventura"); break;
+			case 14: strcpy(versionName, "Sonoma"); break;
+			case 15: strcpy(versionName, "Sequoia"); break;
+			default: strcpy(osName, "Unknown OS version"); strcpy(versionName, "Unknown version name");
+		}
 
 		sprintf(majorVersion, "%d", major);
 		sprintf(minorVersion, "%d", minor);
