@@ -135,10 +135,13 @@ void getgpu(char* gpu) {
 			if (c == '"') {
 				if (recording) {
 					if (matched) {
-						if (j >= 2) {
+						if (j == 0) {
+							strcpy(gpuname, str);
+						} else if (j <= 2) {
+							strcat(gpuname, str);
+						} else {
 							break;
 						}
-						strcat(gpuname, str);
 						j++;
 					}
 					if (strcmp(str, "VGA compatible controller") == 0) {
