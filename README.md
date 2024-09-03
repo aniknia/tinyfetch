@@ -15,3 +15,6 @@ Tinyfetch is a tiny command line system information tool written in C. It can sh
 
 #### Mac Ventura (Intel)
 <img src="img/mac_ventura_intel.jpg" height="80px">
+
+#### Debian Bookworm (Intel)
+<img src="img/debian_bookworm_intel.png" height="80px">
