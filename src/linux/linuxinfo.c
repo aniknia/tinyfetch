@@ -135,7 +135,7 @@ void getgpu(char* gpu) {
 			if (c == '"') {
 				if (recording) {
 					if (matched) {
-						if (j > 2) {
+						if (j >= 2) {
 							break;
 						}
 						strcat(gpuname, str);
