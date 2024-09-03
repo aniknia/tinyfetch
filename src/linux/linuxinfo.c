@@ -132,8 +132,9 @@ void getgpu(char* gpu) {
 		perror("Error calling lspci");
 	} else {
 		for (int i = 0; i < sizeof(fp); i++) {
-			fgets(line, sizeof(line), fp);
+			fgets(line, sizeof(line), fp[i]);
 			strcat(gpu, line);
+			memset(line, 0, sizeof(line));
 		}
 	}
 }
