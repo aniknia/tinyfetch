@@ -130,16 +130,17 @@ void getgpu(char* gpu) {
 	if ((fp = popen("lspci -mm | grep \"VGA\"", "r")) == NULL) {
 		perror("Error calling lspci");
 	} else {
-		int i, c = 0;
-		bool rec = false;
+		int i, c, recording = 0;;
 		while ((c = getc(fp)) != 10) {
 			if (c == '"') {
-				if (open) {
+				if (recording) {
 					strcat(gpu, str);
+					recording = 0;
+				} else {
+					recording = 1;
 				}
 				memset(str, 0, sizeof(str));
 				i = 0;
-				open = !open;
 			} else {
 				str[i++] = c;
 			}
