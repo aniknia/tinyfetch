@@ -138,7 +138,7 @@ void getgpu(char* gpu) {
 						if (j > 2) {
 							break;
 						}
-						strcat(gpu, str);
+						strcat(gpuname, str);
 						j++;
 					}
 					if (strcmp(str, "VGA compatible controller") == 0) {
