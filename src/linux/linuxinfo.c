@@ -138,7 +138,7 @@ void getgpu(char* gpu) {
 		while ((c = getc(fp)) != 10) {
 			if (c == '"') {
 					if (matched) {
-						if (j <= 4) {
+						if (j < 4) {
 							strcat(gpuname, str);
 						} else {
 							break;
