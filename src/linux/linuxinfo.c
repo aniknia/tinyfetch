@@ -125,18 +125,27 @@ void getcpu(char* cpu) {
 
 void getgpu(char* gpu) {
 	FILE* fp;
-	char line[256] = {0};
-	int matched = 0;
+	char str[128] = {0};
 
 	if ((fp = popen("lspci -mm | grep \"VGA\"", "r")) == NULL) {
 		perror("Error calling lspci");
 	} else {
-		for (int i = 0; i < sizeof(fp); i++) {
-			fgets(line, sizeof(line), fp[i]);
-			strcat(gpu, line);
-			memset(line, 0, sizeof(line));
+		int i, c = 0;
+		bool rec = false;
+		while ((c = getc(fp)) != 10) {
+			if (c == '"') {
+				if (open) {
+					strcat(gpu, str);
+				}
+				memset(str, 0, sizeof(str));
+				i = 0;
+				open = !open;
+			} else {
+				str[i++] = c;
+			}
 		}
 	}
+	pclose(fp);
 }
 
 void getmemory() {
