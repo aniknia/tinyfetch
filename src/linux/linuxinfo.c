@@ -130,7 +130,7 @@ void getgpu(char* gpu) {
 		perror("Error calling lspci");
 	} else {
 		int i, j, c, recording, matched = 0;
-		char str[128] = {0}
+		char str[128] = {0};
 		while ((c = getc(fp)) != 10) {
 			if (c == '"') {
 				if (recording) {
