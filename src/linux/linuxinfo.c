@@ -124,24 +124,25 @@ void getcpu(char* cpu) {
 
 void getgpu(char* gpu) {
 	FILE* fp;
-	char str[128] = {0};
+	char gpuname[128] = {0};
 
 	if ((fp = popen("lspci -mm | grep \"VGA\"", "r")) == NULL) {
 		perror("Error calling lspci");
 	} else {
-		int i, j, c, recording = 0;
+		int i, j, c, recording, matched = 0;
+		char str[128] = {0}
 		while ((c = getc(fp)) != 10) {
 			if (c == '"') {
 				if (recording) {
-					if (strcmp(str, "VGA compatible controller") == 0) {
-					} else {
-						if (j == 0) {
-							strcpy(gpu, str);
-						} else if (j < 2) {
-							strcat(gpu, str);
-						} else {
+					if (matched) {
+						if (j > 2) {
 							break;
 						}
+						strcat(gpu, str);
+						j++;
+					}
+					if (strcmp(str, "VGA compatible controller") == 0) {
+						matched = 1;
 					}
 					recording = 0;
 				} else {
@@ -155,6 +156,8 @@ void getgpu(char* gpu) {
 		}
 	}
 	pclose(fp);
+
+	strcpy(gpu, gpuname);
 }
 
 void getmemory() {
