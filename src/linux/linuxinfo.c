@@ -105,7 +105,6 @@ void getcpu(char* cpu) {
 				memset(str, 0, sizeof(str));
 				i = 0;
 			} else {
-				
 				if (strcmp(str, "model name\t: ") == 0) {
 					int j = 0;
 					while (c != 10) {
@@ -130,11 +129,20 @@ void getgpu(char* gpu) {
 	if ((fp = popen("lspci -mm | grep \"VGA\"", "r")) == NULL) {
 		perror("Error calling lspci");
 	} else {
-		int i, c, recording = 0;;
+		int i, j, c, recording = 0;
 		while ((c = getc(fp)) != 10) {
 			if (c == '"') {
 				if (recording) {
-					strcat(gpu, str);
+					if (strcmp(str, "VGA compatible controller") == 0) {
+					} else {
+						if (j == 0) {
+							strcpy(gpu, str);
+						} else if (j < 2) {
+							strcat(gpu, str);
+						} else {
+							break;
+						}
+					}
 					recording = 0;
 				} else {
 					recording = 1;
