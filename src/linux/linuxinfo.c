@@ -131,6 +131,7 @@ void getgpu(char* gpu) {
 	} else {
 		int i = 0;
 		int j = 0;
+		int c = 0;
 		int recording = 0;
 		int matched = 0;
 		char str[128] = {0};
