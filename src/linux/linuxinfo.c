@@ -129,15 +129,15 @@ void getgpu(char* gpu) {
 	if ((fp = popen("lspci -mm | grep \"VGA\"", "r")) == NULL) {
 		perror("Error calling lspci");
 	} else {
-		int i, j, c, recording, matched = 0;
+		int i = 0;
+		int j = 0;
+		int recording = 0;
+		int matched = 0;
 		char str[128] = {0};
 		while ((c = getc(fp)) != 10) {
 			if (c == '"') {
-				if (recording) {
 					if (matched) {
-						if (j == 0) {
-							strcpy(gpuname, str);
-						} else if (j <= 2) {
+						if (j <= 4) {
 							strcat(gpuname, str);
 						} else {
 							break;
@@ -147,10 +147,6 @@ void getgpu(char* gpu) {
 					if (strcmp(str, "VGA compatible controller") == 0) {
 						matched = 1;
 					}
-					recording = 0;
-				} else {
-					recording = 1;
-				}
 				memset(str, 0, sizeof(str));
 				i = 0;
 			} else {
