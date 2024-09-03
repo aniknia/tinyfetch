@@ -120,6 +120,16 @@ void getcpu(char* cpu) {
 	fclose(fp);
 
 	strcpy(cpu, cpuName);
+
+	struct utsname uts;
+	
+	if(uname(&uts) < 0) {
+		perror("uname() error");
+	} else {
+		strcat(cpu , " (");
+		strcat(cpu, uts.machine);
+		strcat(cpu, ")");
+	}
 }
 
 void getgpu(char* gpu) {
