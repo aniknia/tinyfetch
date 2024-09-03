@@ -128,7 +128,7 @@ void getgpu(char* gpu) {
 	char line[256] = {0};
 	int matched = 0;
 
-	if ((fp = popen("lspci", "r")) == NULL) {
+	if ((fp = popen("lspci -mm | grep \"VGA\"", "r")) == NULL) {
 		perror("Error calling lspci");
 	} else {
 		for (int i = 0; i < sizeof(fp); i++) {
