@@ -124,6 +124,18 @@ void getcpu(char* cpu) {
 }
 
 void getgpu(char* gpu) {
+	FILE* fp;
+	char line[256] = {0};
+	int matched = 0;
+
+	if ((fp = popen("lspci")) == NULL) {
+		perror("Error calling lspci");
+	} else {
+		for (int i = 0; i < sizeof(fp); i++) {
+			fgets(line, sizeof(line), fp);
+			strcat(gpu, line);
+		}
+	}
 }
 
 void getmemory() {
