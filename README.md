@@ -19,6 +19,9 @@ Tinyfetch is a tiny command line system information tool written in C. It can sh
 #### Debian Bookworm (Intel)
 <img src="img/debian_bookworm_intel.png" height="80px">
 
+#### NixOS (Intel)
+<img src="img/nixos_warbler_intel.png" height="80px">
+
 ### Getting Started
 
 First download the code onto your computer. Right now tinyfetch will only compile on macOS (arm or x86) and linux machines.
